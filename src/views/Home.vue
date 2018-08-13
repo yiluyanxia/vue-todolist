@@ -76,9 +76,13 @@ export default {
       this.todoLen++
       this.todo = ''
     },
-    deleteTodo (index) {
+    deleteTodo (index, done) {
+      if(done){
+        this.todoLen--
+      }
       this.todoList.splice(index, 1)
       Utils.setItem('todoList', this.todoList)
+      
     },
     changeTodo (index, done) {
       if (done) {
