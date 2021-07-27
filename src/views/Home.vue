@@ -8,32 +8,30 @@
     </header>
     <section>
       <h2>正在进行
-        <span>{{todoLen}}</span>
+        <span>1</span>
       </h2>
-      <ol class="demo-box">
-        <li v-for="(item, index) in todoList" :key="index" v-if="item.done === false">
-          <input type="checkbox" @change="changeTodo(index,true)">
-          <p>{{item.todo}}</p>
-          <a @click="deleteTodo(index,true)">-</a>
-        </li>
-      </ol>
-      <h2>已经完成
-        <span>{{todoList.length - todoLen}}</span>
-      </h2>
-      <ul>
-        <li v-for="(item, index) in todoList" :key="index" v-if="item.done === true">
-          <input type="checkbox" @change="changeTodo(index,false)" checked='checked'>
-          <p>{{item.todo}}</p>
-          <a @click="deleteTodo(index,false)">-</a>
-        </li>
-      </ul>
+        <ol class="demo-box" v-for="(item, index) in todoList" :key="index">
+            <li v-if="item.done === false">
+                <input type="checkbox" @change="changeTodo(index, true)">
+                <p>{{item.todo}}</p>
+                <a @click="deleteTodo(index, true)">-</a>
+            </li>
+        </ol>
+  <h2>已经完成
+    <span>{{todoList.length - todoLen}}</span>
+  </h2>
+  <ul v-for="(item, index) in todoList" :key="index" >
+    <li v-if="item.done === true">
+        <input type="checkbox" @change="changeTodo(index,false)" checked='checked'>
+        <p>{{item.todo}}</p>
+        <a @click="deleteTodo(index,false)">-</a>
+    </li>
+  </ul>
     </section>
-    <footer>
-      Copyright &copy; 2014 todolist.cn
-      <a @click="clearData()">clear</a>
-    </footer>
+<footer>Copyright &copy; 2014 todolist.cn<a @click="clearData()">clear</a></footer>
   </div>
 </template>
+
 
 <script>
 import * as Utils from '@/utils/utils'
