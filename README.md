@@ -24,17 +24,17 @@
 ```
 ├── public                                            
 ├── src                                         
-│   ├── assets                             
-│   │   └── css                              
-│   │       └── styles.css                                          
-│   ├── utils
-│   │   └── utils.js
-│   ├── views
-│   │   └── Home.vue                               
-│   ├── App.vue
-│   ├── main.js
-│   ├── router.js
-``` 
+│   ├── assets                             
+│   │   └── css                              
+│   │       └── styles.css                                          
+│   ├── utils
+│   │   └── utils.js
+│   ├── views
+│   │   └── Home.vue                               
+│   ├── App.vue
+│   ├── main.js
+│   ├── router.js
+```
 ## (二) Html和CSS部分
 
 打开控制台将样式文件复制粘贴到styles.css文件中。在main.js中导入样式
@@ -100,7 +100,7 @@ data () {
     todoLen: 0
   }
 },
-methods: (
+methods: {
   addTodo () {
     let todoObj = {
       todo: this.todo,
@@ -110,16 +110,17 @@ methods: (
     this.todoLen++
     this.todo = ''
   },
-)
+}
 ```
 ### 循环添加的事项
 使用v-for将所添加的事项循环显示，并使用v-if条件渲染只显示的内容。
 ```html
-<li v-for="(item, index) in todoList" :key="index" v-if="item.done === false">
-  <input type="checkbox">
-  <p>{{item.todo}}</p>
-  <a>-</a>
-</li>
+<ol class="demo-box" v-for="(item, index) in todoList" :key="index">
+    <li v-if="item.done === false">
+        <p>{{item.todo}}</p>
+        <a>-</a>
+    </li>
+</ol>
 ```
 这个时候就可以看到添加的内容了  
 ![html和css](./docs/循环显示.png) 
@@ -127,26 +128,26 @@ methods: (
 ### 切换完成状态以及删除功能
 绑定切换状态、删除的事件
 ```html
-<h2>正在进行
-  <span>{{todoLen}}</span>
-</h2>
-<ol class="demo-box">
-  <li v-for="(item, index) in todoList" :key="index" v-if="item.done === false">
-    <input type="checkbox" @change="changeTodo(index,true)">
-    <p>{{item.todo}}</p>
-    <a @click="deleteTodo(index,true)">-</a>
-  </li>
-</ol>
-<h2>已经完成
-  <span>{{todoList.length - todoLen}}</span>
-</h2>
-<ul>
-  <li v-for="(item, index) in todoList" :key="index" v-if="item.done === true">
-    <input type="checkbox" @change="changeTodo(index,false)" checked='checked'>
-    <p>{{item.todo}}</p>
-    <a @click="deleteTodo(index,false)">-</a>
-  </li>
-</ul>
+     <h2>正在进行
+        <span>1</span>
+      </h2>
+        <ol class="demo-box" v-for="(item, index) in todoList" :key="index">
+            <li v-if="item.done === false">
+                <input type="checkbox" @change="changeTodo(index, true)">
+                <p>{{item.todo}}</p>
+                <a @click="deleteTodo(index, true)">-</a>
+            </li>
+        </ol>
+  <h2>已经完成
+    <span>{{todoList.length - todoLen}}</span>
+  </h2>
+  <ul v-for="(item, index) in todoList" :key="index" >
+    <li v-if="item.done === true">
+        <input type="checkbox" @change="changeTodo(index,false)" checked='checked'>
+        <p>{{item.todo}}</p>
+        <a @click="deleteTodo(index,false)">-</a>
+    </li>
+  </ul>
 ```
 根据done的值来控制是否显示，在点击事件中对done取反。对未完成的事项长度进行加减。
 ```js
@@ -260,18 +261,21 @@ clearData () {
 完整的项目在这里[GitHub vue-todolist](https://github.com/yiluyanxia/vue-todolist)。 
 
 *实际上，关于这个ToDoList我写了三个小demo，分别是*  
-[Angular ToDoList](https://segmentfault.com/a/1190000013519099)的小博文，完整的项目在这里[GitHub ng-first](https://github.com/yiluyanxia/ng-first)。  
-[React Native ToDoList](https://segmentfault.com/a/1190000015933522)的小博文，完整的项目在这里[GitHub AwesomeProject](https://github.com/yiluyanxia/AwesomeProject)。  
-[Vue ToDoList](https://segmentfault.com/a/1190000015986287)的小博文，完整的项目在这里[GitHub vue-todolist](https://github.com/yiluyanxia/vue-todolist)。
+
+- [Angular ToDoList](https://segmentfault.com/a/1190000013519099)的小博文，完整的项目在这里[GitHub ng-first](https://github.com/yiluyanxia/ng-first)。  
+- [React Native ToDoList](https://segmentfault.com/a/1190000015933522)的小博文，完整的项目在这里[GitHub AwesomeProject](https://github.com/yiluyanxia/AwesomeProject)。  
+- [Vue ToDoList](https://segmentfault.com/a/1190000015986287)的小博文，完整的项目在这里[GitHub vue-todolist](https://github.com/yiluyanxia/vue-todolist)。
+
+---
 
 *为什么写了三个呢？*  
-因为我闲啊！！ 
+A:因为我闲啊！！ 
 
 *为什么都是写这种超级简单的小demo?*   
-因为复杂的我不会!
+A:因为复杂的我不会!
 
 *说实话，你到底想干嘛？*  
-本来我是想对三个框架进行对比，结果发现技术不佳，学艺不深，无法对其进行比对。所以结论是喜欢哪个就用哪个好了 *（这样不好，不要学我）* 。
+A:本来我是想对三个框架进行对比，结果发现技术不佳，学艺不深，无法对其进行比对。所以结论是喜欢哪个就用哪个好了 *（这样不好，不要学我）* 。
 
 *自问自答是不是很尴尬？*  
-是的。
+A:是的。
